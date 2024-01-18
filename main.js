@@ -1,51 +1,37 @@
-/*
- 
-Descrizione:
-fruttiamo le timing functions per fare il conto alla rovescia per la correzione di domani! Ogni secondo il nostro countdown dovrà scalare fino alle 9:30 di domani mattina!
-Consigli del giorno:
-Questo esercizio richiede un po' di ricerca ma anche un po' di domande che accompagnano l'uomo da tempo immemore:
-Da quante ore è composto un giorno?
-Da quanti minuti è composta un'ora?
-Da quanti secondi è composto un minuto?
-Da quanti millisecondi è composto un secondo?
-Quanti millisecondi mi separano da domani alle 9:30?
-Esiste un oggetto JS in grado di gestire le date?
-Esistono dei metodi per trasformare una data in millisecondi?
+const countdown = () => {
 
-*/
+// prendo la data di oggi
+const dataOggi = new Date().getTime()
+
+// prendo la data di domani
+const dataDomani = new Date ("January 19, 2024 09:30:00").getTime()
+
+// sottraggo quanto manca da oggi a domani
+let giornoMancanti = dataDomani - dataOggi
+
+const secondi = 1000
+const minuti = secondi * 60
+const ore = minuti * 60
+const giorni = ore * 24
+
+const timeGiorni = Math.floor(giornoMancanti / giorni)
+const timeOre = Math.floor((giornoMancanti % giorni) / ore)
+const timeMinuti = Math.floor((giornoMancanti % ore) / minuti)
+const timeSecondi = Math.floor((giornoMancanti % minuti) / secondi)
 
 
-// devo sapere l'ora e la data di oggi e domani
-    // recupero ora con variabile
-// dalla data e l'ora recuperare i secondi
-// intervallo tra oggi e domani in millisecondi
-// secondo deve decrementare fino a zero alle 9:30 di domani mattina 
+document.getElementById("ore").innerHTML = timeOre
+document.getElementById("minuti").innerHTML = timeMinuti
+document.getElementById("secondi").innerHTML = timeSecondi
+}
 
-// DATA OGGI
-const dataOggi = new Date()
-let secondiOggi = dataOggi.getSeconds()
 
-// DATA DOMANI
-const dataDomani = new Date("January 19, 2024 9:30:00")
-let secondiDomani = dataDomani.getSeconds()
+setInterval(countdown, 1000)
 
-//Secondi mancanti tra oggi e domani trasformo millisecondi in secondi
-let millisecMancanti = dataOggi - dataDomani;
-let sec = Math.round(millisecMancanti/1000);
 
-// cuntdown dinamico in Html
-const countdown = setInterval(function(){
-    
-    if(sec === 0){
-        clearInterval()
-        alert("Sono le 9:30!")
 
-    } else{
-        sec++
-        document.getElementById("text").innerHTML = sec * -1
-    }
 
-}, 1000)
+
 
 
 
